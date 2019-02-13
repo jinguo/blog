@@ -3,7 +3,7 @@ title: 书评-YDKJS入门与进阶
 date: 2019/01/31
 updated: 2019/01/31
 categories: 前端
-thumbnail: /getify/You-Dont-Know-JS/raw/master/up %26 going/cover.jpg
+thumbnail: https://raw.githubusercontent.com/getify/You-Dont-Know-JS/master/up%20%26%20going/cover.jpg
 ---
 
 ## 第一章：进入编程
