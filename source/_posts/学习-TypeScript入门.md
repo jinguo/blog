@@ -1,3 +1,10 @@
+---
+title: 学习-TypeScript入门
+date: 2019/02/13
+updated: 2019/02/13
+categories: 前端
+thumbnail: http://img.janggwa.cn/typescript.jpeg
+---
 ## 什么是 TypeScript
 TypeScript 是 JavaScript 的超集，主要提供了类型系统和对 ES6 的支持。它编译出来是 JavaScript，可以运行在任何浏览器上。
 ### TypeScript 的优点

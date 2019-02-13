@@ -3,7 +3,7 @@ title: 书评-YDKJS入门与进阶
 date: 2019/01/31
 updated: 2019/01/31
 categories: 前端
-thumbnail: /getify/You-Dont-Know-JS/raw/master/up %26 going/cover.jpg
+thumbnail: https://raw.githubusercontent.com/getify/You-Dont-Know-JS/master/up%20%26%20going/cover.jpg
 ---
 ## 前言
 我的书评会以对话的形式去表达，ydk 代表 YDKJS 书籍，ingot 代表笔者，google 代表搜索资料，每段对话都是 ydk 提问，ingot 先说自己的理解，然后 ydk 再给予正确的解答。
