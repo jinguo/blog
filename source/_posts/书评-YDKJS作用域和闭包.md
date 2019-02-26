@@ -48,6 +48,85 @@ JavaScript 所采用的作用域模型是词法作用域。
 欺骗词法作用域的使用会导致更低下的性能。因为 JS 引擎的一些优化原理都归结在实质上在进行词法分析时可以静态地分析代码，并提前决定所有的变量和函数声明在什么位置。如果发现一个 eval 或是 with，它实质上就不得不假定自己知道的所有标识符的位置可能是无效的。
 
 ## 第三章 函数与块儿作用域
+
+### 函数作用域
 函数中的作用域也就是声明的每一个函数都为自己创建了一个作用域。
+立即调用函数表达式可以生成一个自己的作用域。
 
+### 块儿作用域
+ES6引入了 let 和 const，它们都会创建一个块儿作用域。
+let 做出的声明不会在他们所出现的块儿的作用域中提升。
 
+## 第四章 提升
+在代码的任何部分被执行之前，所有的声明，变量和函数，都会首先被处理。以下是两个例子
+```javascript
+a = 2;
+var a;
+console.log( a ); // 2
+```
+```javascript
+console.log( a ); // undefined
+var a = 2;
+```
+函数声明会被提升，但是函数表达式不会。
+```javascript
+foo();
+function foo() {
+	console.log( a ); // undefined
+	var a = 2;
+}
+```
+```javascript
+foo(); // 不是 ReferenceError， 而是 TypeError! 因为变量 foo 被提升了，但是值为 undefined
+
+var foo = function bar() {
+	// ...
+};
+```
+函数声明和变量声明都会被提升。但是函数会首先被提升，然后才是变量。
+```javascript
+foo(); // 1
+var foo;
+function foo() {
+	console.log( 1 );
+}
+foo = function() {
+	console.log( 2 );
+};
+```
+这个代码被引擎解释执行为
+```javascript
+function foo() {
+	console.log( 1 );
+}
+foo(); // 1
+foo = function() {
+	console.log( 2 );
+};
+```
+这里的一个注意点就是 var foo 是一个重复的声明，会被忽略。
+
+## 第五章 作用域闭包
+闭包就是函数能够记住并访问它的词法作用域，即使当这个函数在它的词法作用域之外执行时。
+以下例子是一个典型的闭包案例
+```javascript
+function foo() {
+	var a = 2;
+	function bar() {
+		console.log( a );
+	}
+	return bar;
+}
+var baz = foo();
+baz(); // 2 -- 哇噢，看到闭包了，伙计。
+```
+我们生活中经常使用到的闭包
+```javascript
+function wait(message) {
+	setTimeout( function timer(){
+		console.log( message );
+	}, 1000 );
+
+}
+wait( "Hello, closure!" );
+```
