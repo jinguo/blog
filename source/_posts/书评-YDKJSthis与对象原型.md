@@ -89,3 +89,68 @@ baz(); // <-- `baz` 的调用点
 3. 然后判断函数是通过环境对象被调用的嘛？ 如果是，this 就是那个环境对象。
 
 4. 否则，使用默认的 this。如果在 strict mode 下，就是 undefined，否则就是 global 对象。
+
+如果传递 null 或 undefined 作为 call、 apply 或 bind 的 this 绑定参数，那么这些值会被忽略掉，取而代之的是默认绑定规则将适用于这个调用。这样会带来一些潜在的危险。如果你这样处理一些函数调用，而且那些函数确实使用了 this 引用，那么默认绑定规则意味着它可能会不经意间引用 global 对象。很显然，这样的陷阱会导致多种非常难诊断和追踪的 bug。安全的做法是通过 `Object.create(null)` 来作为绑定参数。
+
+我们知道硬绑定是一种通过将函数强制绑定到特定的 this 上，来防止函数调用在不经意间退回到默认绑定的策略。问题是，硬绑定极大地降低了函数的灵活性，阻止我们手动使用隐含绑定或后续的明确绑定来覆盖 this。
+
+软化绑定的思路就是为默认绑定提供不同的默认值，同时保持函数可以通过隐含绑定或明确绑定技术来手动绑定 this。
+
+下面我们就分别展示硬绑定和软化绑定的代码实现
+硬绑定
+```javascript
+if (!Function.prototype.bind) {
+	Function.prototype.bind = function(oThis) {
+		if (typeof this !== "function") {
+			// 可能的与 ECMAScript 5 内部的 IsCallable 函数最接近的东西，
+			throw new TypeError( "Function.prototype.bind - what " +
+				"is trying to be bound is not callable"
+			);
+		}
+
+		var aArgs = Array.prototype.slice.call( arguments, 1 ),
+			fToBind = this,
+			fNOP = function(){},
+			fBound = function(){
+				return fToBind.apply(
+					(
+						this instanceof fNOP &&
+						oThis ? this : oThis
+					),
+					aArgs.concat( Array.prototype.slice.call( arguments ) )
+				);
+			}
+		;
+
+		fNOP.prototype = this.prototype;
+		fBound.prototype = new fNOP();
+
+		return fBound;
+	};
+}
+```
+软绑定
+```javascript
+if (!Function.prototype.softBind) {
+	Function.prototype.softBind = function(obj) {
+		var fn = this,
+			curried = [].slice.call( arguments, 1 ),
+			bound = function bound() {
+				return fn.apply(
+					(!this ||
+						(typeof window !== "undefined" &&
+							this === window) ||
+						(typeof global !== "undefined" &&
+							this === global)
+					) ? obj : this,
+					curried.concat.apply( curried, arguments )
+				);
+			};
+		bound.prototype = Object.create( fn.prototype );
+		return bound;
+	};
+}
+```
+
+## 第三章：对象
+
