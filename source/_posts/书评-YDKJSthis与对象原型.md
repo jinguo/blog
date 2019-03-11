@@ -119,8 +119,7 @@ if (!Function.prototype.bind) {
 					),
 					aArgs.concat( Array.prototype.slice.call( arguments ) )
 				);
-			}
-		;
+			};
 
 		fNOP.prototype = this.prototype;
 		fBound.prototype = new fNOP();
@@ -153,4 +152,30 @@ if (!Function.prototype.softBind) {
 ```
 
 ## 第三章：对象
+对象是大多是 JS 程序依赖的基本构建块儿。
+
+一个常见的错误论断是“JavaScript中的一切都是对象”。这明显是不对的。比如 string、number、boolean、null、undefined 这几个简单基本类型自身不是 object。
+
+一个 JSON 安全的对象可以简单地这样复制：
+```javascript
+var newObj = JSON.parse( JSON.stringify( someObj ) );
+```
+
+浅拷贝可以使用 `Object.assign()`来实现。
+
+所有的属性都用属性描述符来描述，通过`Object.getOwnPropertyDescriptor()`来查看，会发现一个对象不仅只有 value 值，还有 writable、enumerable 和 configurable。
+
+当然我们也可以使用`Object.defineProperty()`来添加新属性或使用期望的性质来修改既存的属性。
+
+writable 控制着改变属性值的能力。
+
+configurable 控制着该对象是否可配置
+
+enumerable 控制该对象是否可枚举
+
+防止扩展：`Object.preventExtensions()`可以防止一个对象被添加新的属性，同时保留其他既存的对象属性。
+
+封印：`Object.seal()`既不能添加更多的属性，也不能重新配置或删除既存属性，但是你依然可以修改他们的值。
+
+冻结：`Object.freeze()`阻止任何对对象或对象直属属性的改变。
 
