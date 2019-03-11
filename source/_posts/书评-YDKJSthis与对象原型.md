@@ -179,3 +179,65 @@ enumerable 控制该对象是否可枚举
 
 冻结：`Object.freeze()`阻止任何对对象或对象直属属性的改变。
 
+属性不必非要包含值 —— 它们也可以是带有 getter/setter 的“访问器属性”。
+```javascript
+var myObject = {
+	// 为 `a` 定义 getter
+	get a() {
+		return this._a_;
+	},
+
+	// 为 `a` 定义 setter
+	set a(val) {
+		this._a_ = val * 2;
+	}
+};
+
+myObject.a = 2;
+
+myObject.a; // 4
+```
+
+你也可以使用 ES6 的 for..of 语法，在数据结构（数组，对象等）中迭代值，它寻找一个内建或自定义的 @@iterator 对象，这个对象由一个 next() 方法组成，通过这个 next() 方法每次迭代一个数据。
+```javascript
+var myObject = {
+	a: 2,
+	b: 3
+};
+
+Object.defineProperty( myObject, Symbol.iterator, {
+	enumerable: false,
+	writable: false,
+	configurable: true,
+	value: function() {
+		var o = this;
+		var idx = 0;
+		var ks = Object.keys( o );
+		return {
+			next: function() {
+				return {
+					value: o[ks[idx++]],
+					done: (idx > ks.length)
+				};
+			}
+		};
+	}
+} );
+
+// 手动迭代 `myObject`
+var it = myObject[Symbol.iterator]();
+it.next(); // { value:2, done:false }
+it.next(); // { value:3, done:false }
+it.next(); // { value:undefined, done:true }
+
+// 用 `for..of` 迭代 `myObject`
+for (var v of myObject) {
+	console.log( v );
+}
+// 2
+// 3
+```
+
+## 第四章：混合（淆）“类”的对象
+
+
