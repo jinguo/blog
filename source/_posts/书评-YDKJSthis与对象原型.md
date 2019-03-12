@@ -239,5 +239,50 @@ for (var v of myObject) {
 ```
 
 ## 第四章：混合（淆）“类”的对象
+类描述了一种特定的代码组织和结构形式，他有实例化、继承和多态等机制。
 
+mixin 模式常用于在某种程度上模拟类的拷贝行为，但是这通常导致像显式假想多态那样（OtherObj.methodName.call(this, ...)）难看而且脆弱的语法，这样的语法又常导致更难懂和更难维护的代码。
+
+明确的 mixin 和类拷贝又不完全相同，因为对象（和函数！）仅仅是共享的引用被复制，不是对象/函数自身被复制。
+
+## 第五章：原型
+每个普通的 [[prototype]] 链的最顶端，是内建的 Object.prototype。
+
+我们现在来考察 myObject.foo = "bar" 赋值的三种场景，当 foo 不直接存在于 myObject，但存在于 myObject 的 [[Prototype]] 链的更高层时：
+
+1. 如果一个普通的名为 foo 的数据访问属性在 [[Prototype]] 链的高层某处被找到，而且没有被标记为只读（writable:false），那么一个名为 foo 的新属性就直接添加到 myObject 上，形成一个遮蔽属性。
+
+2. 如果一个 foo 在 [[Prototype]] 链的高层某处被找到，但是它被标记为只读（writable:false） ，那么设置既存属性和在 myObject 上创建遮蔽属性都是不允许的。如果代码运行在 strict mode 下，一个错误会被抛出。否则，这个设置属性值的操作会被无声地忽略。不论怎样，没有发生遮蔽。
+
+3. 如果一个 foo 在 [[Prototype]] 链的高层某处被找到，而且它是一个 setter，那么这个 setter 总是被调用。没有 foo 会被添加到（也就是遮蔽在）myObject 上，这个 foo setter 也不会被重定义。
+
+我们通过 instanceof 或者 isPrototypeOf 方法来判断一个对象是否存在某个原型链中。
+
+__proto__ 的代码实现如下
+```javascript
+Object.defineProperty( Object.prototype, "__proto__", {
+	get: function() {
+		return Object.getPrototypeOf( this );
+	},
+	set: function(o) {
+		// ES6 的 setPrototypeOf(..)
+		Object.setPrototypeOf( this, o );
+		return o;
+	}
+} );
+```
+
+
+Object.create() 的代码实现如下
+```javascript
+if (!Object.create) {
+	Object.create = function(o) {
+		function F(){}
+		F.prototype = o;
+		return new F();
+	};
+}
+```
+
+## 第六章：行为委托
 
