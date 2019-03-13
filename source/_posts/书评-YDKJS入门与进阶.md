@@ -1,7 +1,6 @@
 ---
 title: 书评-YDKJS入门与进阶
 date: 2019/02/15
-updated: 2019/02/15
 categories: 前端
 thumbnail: https://raw.githubusercontent.com/getify/You-Dont-Know-JS/master/up%20%26%20going/cover.jpg
 ---

@@ -1,7 +1,6 @@
 ---
 title: 书评-YDKJS作用域与闭包
 date: 2019/02/18
-updated: 2019/02/18
 categories: 前端
 thumbnail: https://raw.githubusercontent.com/getify/You-Dont-Know-JS/master/scope%20&%20closures/cover.jpg
 ---

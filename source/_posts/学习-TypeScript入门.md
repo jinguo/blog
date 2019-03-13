@@ -1,7 +1,6 @@
 ---
 title: 学习-TypeScript入门
 date: 2019/02/13
-updated: 2019/02/13
 categories: 前端
 thumbnail: http://img.janggwa.cn/typescript.jpeg
 ---
