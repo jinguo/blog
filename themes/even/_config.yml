@@ -3,7 +3,7 @@
 # ===========================================
 
 # Site creation time
-since: 2015
+since: 2017
 
 # Custom your favicon.ico in `site/source`
 favicon: /favicon.ico
@@ -91,7 +91,7 @@ google_analytics: UA-136124913-1
 google_verification: UA-136124913-1
 
 # Disqus
-disqus_shortname: disqus_40jXQQdSKu
+disqus_shortname: jinguo
 
 #Changyan
 changyan:
