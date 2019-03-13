@@ -18,10 +18,10 @@ rss: default
 # ===========================================
 menu:
   Home: /
-  # Archives: /archives/
+  Archives: /archives/
   # Tags: /tags
   # Categories: /categories
-  # About: /about
+  About: /about
 
 # ===========================================
 # Theme Settings
@@ -57,13 +57,13 @@ reward:
 # Social links Settings
 # ===========================================
 social:
-  email: your@email.com
+  email: janggwazkw@gmail.com
   stack-overflow:
   twitter:
   facebook:
   linkedin:
   google:
-  github: https://github.com/ahonn
+  github: https://github.com/janggwa
   weibo:
   zhihu:
   douban:
@@ -77,8 +77,8 @@ social:
 
 # LeanCloud
 leancloud:
-  app_id:
-  app_key:
+  app_id: IjDFyQ3yasLyrQTbfVxBRd9n-gzGzoHsz
+  app_key: XzgCCdnbtrGLTQmVxBRrxYhe
 
 # Baidu Analytics
 baidu_analytics:
@@ -86,12 +86,12 @@ baidu_analytics:
 baidu_verification:
 
 # Google Analytics
-google_analytics:
+google_analytics: UA-136124913-1
 # Google Verification
-google_verification:
+google_verification: UA-136124913-1
 
 # Disqus
-disqus_shortname:
+disqus_shortname: disqus_40jXQQdSKu
 
 #Changyan
 changyan:

@@ -14,7 +14,7 @@ TypeScript 是 JavaScript 的超集，主要提供了类型系统和对 ES6 的�
 ### TypeScript 的缺点
 1. 有一定的学习成本（接口、泛型等）
 2. 会增加一些开发成本（多写一些类型的定义）
-
+<!-- more -->
 ## TypeScript 安装
 命令行： `npm install -g typescript`
 安装完成后会在全局环境安装`tsc`命令，编译一个 typescript 文件直接用命令 `tsc xxx.ts` 即可。
