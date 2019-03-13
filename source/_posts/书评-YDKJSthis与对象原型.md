@@ -1,3 +1,10 @@
+---
+title: 书评-YDKJSthis与对象原型
+date: 2019/03/13
+updated: 2019/03/13
+categories: 前端
+thumbnail: https://raw.githubusercontent.com/getify/You-Dont-Know-JS/master/this%20&%20object%20prototypes/cover.jpg
+---
 ## 第一章：this 是什么
 this 不是编写时绑定，而是运行时绑定。它依赖于函数调用的上下文条件。 this 绑定与函数声明的位置没有任何关系，而与函数被调用的方式紧密相连。
 
@@ -285,4 +292,55 @@ if (!Object.create) {
 ```
 
 ## 第六章：行为委托
+行为委托意味着对象彼此是对等的，在它们自己当中相互委托，而不是父类与子类的关系。JavaScript 的 [[Prototype]] 机制的设计本质，就是行为委托机制。这意味着我们可以选择挣扎着在 JS 上实现类机制，也可以欣然接受 [[Prototype]] 作为委托机制的本性。
 
+面线对象和行为委托的思维模式比较如下：
+面向对象的代码形式：
+```javascript
+function Foo(who) {
+	this.me = who;
+}
+Foo.prototype.identify = function() {
+	return "I am " + this.me;
+};
+
+function Bar(who) {
+	Foo.call( this, who );
+}
+Bar.prototype = Object.create( Foo.prototype );
+
+Bar.prototype.speak = function() {
+	alert( "Hello, " + this.identify() + "." );
+};
+
+var b1 = new Bar( "b1" );
+var b2 = new Bar( "b2" );
+
+b1.speak();
+b2.speak();
+```
+面向行为委托的代码形式：
+```javascript
+var Foo = {
+	init: function(who) {
+		this.me = who;
+	},
+	identify: function() {
+		return "I am " + this.me;
+	}
+};
+
+var Bar = Object.create( Foo );
+
+Bar.speak = function() {
+	alert( "Hello, " + this.identify() + "." );
+};
+
+var b1 = Object.create( Bar );
+b1.init( "b1" );
+var b2 = Object.create( Bar );
+b2.init( "b2" );
+
+b1.speak();
+b2.speak();
+```
