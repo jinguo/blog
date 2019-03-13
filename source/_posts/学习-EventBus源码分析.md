@@ -1,5 +1,5 @@
 ---
-title: 学习-TypeScript入门
+title: 学习-EventBus源码分析
 date: 2016/08/03
 categories: Android
 ---
