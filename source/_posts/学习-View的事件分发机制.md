@@ -12,6 +12,7 @@ categories: Android
 返回值受当前View的onTouchEvent和下级View的dispatchTouchEvent的影响
 
 返回值表示当前的事件时候已经被处理完成
+<!-- more -->
 ```java
 public boolean dispatchTouchEvent(MotionEvent e)
 ```

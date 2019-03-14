@@ -6,6 +6,7 @@ thumbnail: http://img.janggwa.cn/typescript.jpeg
 ---
 ## 什么是 TypeScript
 TypeScript 是 JavaScript 的超集，主要提供了类型系统和对 ES6 的支持。它编译出来是 JavaScript，可以运行在任何浏览器上。
+<!-- more -->
 ### TypeScript 的优点
 1. 增加了代码的可读性和可维护性（类型系统、编译报错、代码补全、接口提示等）
 2. TypeScript 非常包容（类型推论、定义一切类型、兼容三方库等）
@@ -13,7 +14,7 @@ TypeScript 是 JavaScript 的超集，主要提供了类型系统和对 ES6 的�
 ### TypeScript 的缺点
 1. 有一定的学习成本（接口、泛型等）
 2. 会增加一些开发成本（多写一些类型的定义）
-<!-- more -->
+
 ## TypeScript 安装
 命令行： `npm install -g typescript`
 安装完成后会在全局环境安装`tsc`命令，编译一个 typescript 文件直接用命令 `tsc xxx.ts` 即可。

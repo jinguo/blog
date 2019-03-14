@@ -7,7 +7,7 @@ thumbnail: https://raw.githubusercontent.com/getify/You-Dont-Know-JS/master/type
 
 ## 第一章：类型
 JavaScript 定义了七种内建类型：null、undefined、boolean、number、string、object、symbol。
-
+<!-- more -->
 typeof 操作符可以检测给定值的类型。
 ```javascript
 typeof undefined     === "undefined"; // true

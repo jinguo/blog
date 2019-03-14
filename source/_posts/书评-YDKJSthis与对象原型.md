@@ -6,11 +6,10 @@ thumbnail: https://raw.githubusercontent.com/getify/You-Dont-Know-JS/master/this
 ---
 ## 第一章：this 是什么
 this 不是编写时绑定，而是运行时绑定。它依赖于函数调用的上下文条件。 this 绑定与函数声明的位置没有任何关系，而与函数被调用的方式紧密相连。
-
+<!-- more -->
 this 既不是函数自身的引用，也不是函数词法作用域的引用。
 
 this 实际上是在函数被调用时建立的一个绑定，它指向什么是完全由函数被调用的调用点来决定的。
-<!-- more -->
 
 首先展示一下 this 的动机和用途:
 ```javascript

@@ -7,7 +7,7 @@ thumbnail: https://raw.githubusercontent.com/getify/You-Dont-Know-JS/master/scop
 ## 第一章 什么是作用域？
 几乎所有语言的最基础模型之一就是在变量中存储值，并且在稍后取出或修改这些值的能力。
 作用域就是定义如何在某些位置存储变量，以及如何在稍后找到这些变量。
-
+<!-- more -->
 ### 编译器理论
 编译的三个步骤
 
@@ -18,7 +18,6 @@ thumbnail: https://raw.githubusercontent.com/getify/You-Dont-Know-JS/master/scop
 3.代码生成：这个处理将抽象语法树转换为可执行的代码。
 
 JavaScript 的编译和其他语言不同，不是提前发生在一个构建的步骤中。对于 JavaScript 来说，在许多情况下，编译发生在代码执行前的仅仅几微秒之内。为了确保最快的性能，JS 引擎使用了 JIT等等
-<!-- more -->
 
 ### 理解作用域
 引擎：负责从始至终的编译和执行我们的 JavaScript 程序。
