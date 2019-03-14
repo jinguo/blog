@@ -4,15 +4,17 @@ date: 2016/08/13
 categories: Android
 ---
 
-##1.View点击事件的传递规则
-首先,用户触摸屏幕的时候系统必须对事件做出相应反应.而这个事件就是产生一个MotionEvent然后按照一定的规则传递给每一个View去进行相应的处理.这就是我们所谓的事件分发了.点击事件的分发主要设计一下几个主要的方法:
+## 1.View点击事件的传递规则
+首先,用户触摸屏幕的时候系统必须对事件做出相应反应.而这个事件就是产生一个MotionEvent然后按照一定的规则传递给每一个View去进行相应的处理.这就是我们所谓的事件分发了.
+<!-- more -->
+点击事件的分发主要设计一下几个主要的方法:
 
 用来进行事件的分发.如果有事件传递给当前的View,那么该View一定会去调用这个方法
 
 返回值受当前View的onTouchEvent和下级View的dispatchTouchEvent的影响
 
 返回值表示当前的事件时候已经被处理完成
-<!-- more -->
+
 ```java
 public boolean dispatchTouchEvent(MotionEvent e)
 ```
@@ -75,7 +77,7 @@ public boolean onTouchEvent(MotionEvent event) {
 6.View的onTouchEvent默认都会消耗事件(返回true),除非他是不可点击的(clickable和龙Clickable同时为false).View的longClickable默认都是false,clickable分情况.
 
 
-##2.Activity对事件的分发
+## 2.Activity对事件的分发
 点击事件用MotionEvent来表示,当点击事件发生的时候,事件最先传递给当前Activity,由Activity的dispatchTouchEvent来进行事件派发,具体工作是由Activity内部的Windows来处理的.Windows会将事件传递给decor view,即当前View的root view.先看一下Activity的dispatchTouchEvent源码:
 ```java
 public boolean diapatchTouchEvent(MotionEvent e) {
@@ -128,7 +130,7 @@ private final class DecorView extends FrameLayout implements RootViewSurfaceTake
 到了这事件会继续分发,到我们通过setContentView设置的ViewGroup那里继续处理.
 
 
-##3.ViewGroup对事件的分发
+## 3.ViewGroup对事件的分发
 ```java
 // Check for interception.
 final boolean intercepted;
@@ -280,7 +282,7 @@ if (actionMasked == MotionEvent.ACTION_DOWN|| mFirstTouchTarget != null) {
     }
 ```
 逻辑也比清晰,遍历ViewGroup的所有子View,找出能接受事件的所有元素;要满足两个条件:1.坐标是否落在子View中2.是否正在播放动画.满足这两个条件,就会分发给他来处理,要是返回了true就表示事件已经被处理,mFirstTouchTarget就会被赋值并终止此次分发,否则继续分发过程.
-##4.View对点击事件的处理过程
+## 4.View对点击事件的处理过程
 ```java  
     //View#dispatchTouchEvent
 
@@ -310,12 +312,12 @@ if (actionMasked == MotionEvent.ACTION_DOWN|| mFirstTouchTarget != null) {
 ```
 这里相对比较简单,首先判断是否设置了onTouchListener,如果设置了就去调用onTouch方法,如果返回了false,则去调用onTouchEvent方法; ***在view设置了onClickListener或者onLongClickListener后,会自动将CLICKABLE或者LONG_CLICKABLE变成ture;***
 
-##最后三张图十分清晰
+## 最后三张图十分清晰
 
 效果图如下：
 View不处理事件流程图（View没有消费事件）[![Touch Ignore](https://github.com/hanhailong/AndroidStudyResources/blob/master/screenshot/view_touch_ignorant.png?raw=true)](https://github.com/hanhailong/AndroidStudyResources/blob/master/screenshot/view_touch_ignorant.png?raw=true)
 View处理事件[![Touch interest](https://github.com/hanhailong/AndroidStudyResources/blob/master/screenshot/view_touch_interested.png?raw=true)](https://github.com/hanhailong/AndroidStudyResources/blob/master/screenshot/view_touch_interested.png?raw=true)
 事件拦截[![Touch Intercept](https://raw.githubusercontent.com/hanhailong/AndroidStudyResources/master/screenshot/view_touch_intercept.png)](https://raw.githubusercontent.com/hanhailong/AndroidStudyResources/master/screenshot/view_touch_intercept.png)
 
-##附录
+## 附录
 以后每个知识点的实践学习代码会上传到我的[GitHub](https://github.com/JangGwa),欢迎大家一起学习-.-~
