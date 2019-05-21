@@ -1,1 +1,2 @@
-热爱技术，热爱运动的 sunshine boy.
+#### 邮箱: janggwazkw@gmail.com
+#### 微信公众号: 金果周刊
