@@ -1,5 +1,5 @@
 ---
-title: 学习-JS基础知识点
+title: 学习-JS进阶知识点
 date: 2019/05/28
 categories: 前端
 ---
